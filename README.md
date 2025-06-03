@@ -19,8 +19,7 @@ During log archiving, separate logs by node into distinct folders or files, so e
 Add automated health checks to verify that the servers themselves are operational and reachable before starting disk and memory usage checks — for example, simple ping tests or service status verifications.
 
 **Improvement 2:**  
-(If no specific idea is available currently, suggest a general improvement:)  
-Enhance logging and alerting by integrating with notification systems (e.g., Slack, Email, PagerDuty) to notify the team of threshold breaches or service restarts in real time, rather than relying solely on logs.
+Enhance logging and alerting by integrating with notification systems to notify the team of threshold breaches or service restarts in real time, rather than relying solely on logs.
 
 ---
 
