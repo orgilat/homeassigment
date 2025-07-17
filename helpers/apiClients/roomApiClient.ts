@@ -12,8 +12,8 @@ export class RoomApi {
       baseURL: 'https://automationintesting.online',
       extraHTTPHeaders: {
         'Content-Type': 'application/json',
-        // הוספתי כפרמטר token כדי שתוכל לשנות לטוקן אחר או ריק בקלות
-        'Cookie':`token=JOwQv9RNq7gAQXk5`,
+        // Token passed as a parameter to easily allow switching to a different or empty token
+        'Cookie': `token=MVmKsPsNDsWO5OUN`,
       },
     });
     return new RoomApi(context);
@@ -33,7 +33,7 @@ export class RoomApi {
 
   async createRoom(data: any, expectedStatus: number | number[] = [200, 201]) {
     const res = await this.api.post('/api/room', {
-      data, // חשוב: משתמשים ב data ולא ב body
+      data, // Important: use `data` instead of `body` when sending JSON
     });
 
     if (Array.isArray(expectedStatus)) {
@@ -44,8 +44,6 @@ export class RoomApi {
 
     return res.json();
   }
-
- 
 
   async deleteRoom(id: number, expectedStatus: number | number[] = [200, 204]) {
     const res = await this.api.delete(`/api/room/${id}`);

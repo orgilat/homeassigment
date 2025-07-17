@@ -13,7 +13,7 @@ export default defineConfig({
     headless: true,
   },
   reporter: [
-    ['list'], // מציג תוצאה בטקסט במסוף
-    ['allure-playwright'], // ← הכי חשוב בשביל דוחות Allure
+    ['list'], // Displays test results in the terminal
+    ['allure-playwright'], // Most important: enables Allure reports
   ],
 });

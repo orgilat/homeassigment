@@ -1,10 +1,10 @@
 import { Page, Locator, expect } from '@playwright/test';
-import logger from '../logger';  // נתיב בהתאם למיקום הקובץ
+import logger from '../logger'; // Logger instance for debugging
 
 export class HomePage {
   readonly page: Page;
 
-  // Navigation links in header
+  // Header navigation links
   readonly navLinks: Locator;
 
   // Contact form fields
@@ -15,11 +15,11 @@ export class HomePage {
   readonly messageInput: Locator;
   readonly submitButton: Locator;
 
-  // Contact form validation messages
+  // Contact form messages
   readonly errorMessages: Locator;
   readonly successMessage: Locator;
 
-  // Booking flow buttons (E2E)
+  // Booking flow buttons
   readonly checkAvailabilityButton: Locator;
   readonly bookNowButton: Locator;
 
@@ -41,11 +41,13 @@ export class HomePage {
     this.bookNowButton = page.locator("(//a[@class='btn btn-primary'])[1]");
   }
 
+  // Navigate to homepage
   async goto() {
     logger.info('Navigating to homepage');
     await this.page.goto('https://automationintesting.online/');
   }
 
+  // Click a nav link by index and expect page scroll to occur
   async clickNavLinkAndExpectScroll(index: number) {
     logger.info(`Clicking nav link at index ${index} and expecting scroll`);
     const link = this.navLinks.nth(index);
@@ -59,6 +61,7 @@ export class HomePage {
     expect(afterScroll).not.toBe(beforeScroll);
   }
 
+  // Click a nav link and verify that the URL changes as expected
   async clickNavLinkAndExpectURL(index: number, expectedURLPart: string) {
     logger.info(`Clicking nav link at index ${index} and expecting URL part "${expectedURLPart}"`);
     const link = this.navLinks.nth(index);
@@ -69,11 +72,13 @@ export class HomePage {
     logger.info(`URL after click contains "${expectedURLPart}"`);
   }
 
+  // Submit contact form without filling any fields
   async submitEmptyForm() {
     logger.info('Submitting empty contact form');
     await this.submitButton.click();
   }
 
+  // Fill form with valid inputs except for an invalid phone number
   async fillFormWithValidDataExceptPhone(invalidPhone: string) {
     logger.info(`Filling contact form with invalid phone: ${invalidPhone}`);
     await this.nameInput.fill('Valid Name');
@@ -84,6 +89,7 @@ export class HomePage {
     await this.submitButton.click();
   }
 
+  // Fill form with valid inputs except for an invalid email
   async fillFormWithValidDataExceptEmail(invalidEmail: string) {
     logger.info(`Filling contact form with invalid email: ${invalidEmail}`);
     await this.nameInput.fill('Valid Name');
@@ -94,6 +100,7 @@ export class HomePage {
     await this.submitButton.click();
   }
 
+  // Fill form with valid inputs except for an invalid subject
   async fillFormWithValidDataExceptSubject(invalidSubject: string) {
     logger.info(`Filling contact form with invalid subject: ${invalidSubject}`);
     await this.nameInput.fill('Valid Name');
@@ -104,6 +111,7 @@ export class HomePage {
     await this.submitButton.click();
   }
 
+  // Fill form with valid inputs except for an invalid message
   async fillFormWithValidDataExceptMessage(invalidMessage: string) {
     logger.info(`Filling contact form with invalid message: ${invalidMessage}`);
     await this.nameInput.fill('Valid Name');
@@ -114,6 +122,7 @@ export class HomePage {
     await this.submitButton.click();
   }
 
+  // Fill all fields in the contact form with valid inputs and submit
   async fillFormWithAllValidData() {
     logger.info('Filling contact form with all valid data');
     await this.nameInput.fill('Valid Name');
@@ -124,6 +133,7 @@ export class HomePage {
     await this.submitButton.click();
   }
 
+  // Verify that specific error messages are shown after invalid form submission
   async expectErrors(expected: string[]) {
     logger.info(`Expecting error messages: ${expected.join(', ')}`);
     for (const msg of expected) {
@@ -131,11 +141,13 @@ export class HomePage {
     }
   }
 
+  // Confirm that a success message is shown after valid form submission
   async expectSuccessMessage() {
     logger.info('Expecting success message after form submission');
     await expect(this.successMessage).toBeVisible();
   }
 
+  // Start the booking flow by checking availability and clicking "Book Now"
   async startBookingFlow() {
     logger.info('Starting booking flow');
     await this.checkAvailabilityButton.click();
