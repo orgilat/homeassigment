@@ -1,7 +1,7 @@
 import { chromium } from '@playwright/test';
 
 async function globalSetup() {
-  const browser = await chromium.launch({ headless: false, slowMo: 200 });
+  const browser = await chromium.launch({ headless: true, slowMo: 200 });
   const context = await browser.newContext();
   const page = await context.newPage();
 
@@ -13,7 +13,7 @@ async function globalSetup() {
   await page.waitForURL('**/admin', { timeout: 5000 });
 
   await context.storageState({ path: 'storageState.json' });
-  console.log('✅ storageState נשמר');
+  console.log(' storageState נשמר');
 
   await browser.close();
 }
