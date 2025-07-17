@@ -4,9 +4,9 @@
 
 This repository contains manual and automated tests for [**https://automationintesting.online/**](https://automationintesting.online/):
 
-* **API tests** exercise the `Rooms` endpoint (`GET`, `POST`, `DELETE`).
+* **API tests** exercise the Rooms endpoint (GET, POST, DELETE) using the RoomApi client utilities located in helpers/apiClients/roomApiClient.ts.
 
-* **UI tests** are fully automated, covering Navigation, Contact Form, and Full Booking Flow with 100% implementation (see Coverage Matrix for details).
+* **UI tests** cover Navigation (Sweep 1), Contact Form (Sweep 2) and Full Booking Flow (Sweep 3) using a Page Object Model in Playwright + TypeScript.  
 
 * **Allure** generates a rich HTML report; three attached screenshots illustrate key outcomes.
 
